@@ -5,7 +5,7 @@ services:
   front:
     build: front/.
     volumes:
-     - ./front:/app
+     - ./front/src:/app/src
     ports:
      - 7010:7010
   web:
