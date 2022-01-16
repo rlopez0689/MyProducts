@@ -1,0 +1,41 @@
+
+version: "3.9"
+
+services:
+  front:
+    build: front/.
+    volumes:
+     - ./front:/app
+    ports:
+     - 7010:7010
+  web:
+    build: api/.
+    working_dir: /usr/src/app/api
+    command: >
+       bash -c "
+         ./wait-for-postgres.sh db &&
+         python manage.py migrate && python manage.py runserver 0.0.0.0:7070
+       "
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - "7070:7070"
+    environment:
+      - DB_NAME=foodin
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+    depends_on:
+      - db
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_NAME=foodin
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
