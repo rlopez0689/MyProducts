@@ -25,15 +25,18 @@ After spinning up the container with docker you will have:
 
 - Back End
 ```bash
-docker exec -it myproductschallenge_web_1 bash
-python manage.py test
+docker exec -it myproductschallenge_web_1 python manage.py test
+```
+
+- Front End
+```bash
+docker exec -it myproductschallenge_front_1 npm test
 ```
 
 ## Create Djando Admin User
 
 ```bash
-docker exec -it myproductschallenge_web_1 bash
-python manage.py createsuperuser
+docker exec -it myproductschallenge_web_1 python manage.py createsuperuser
 ```
 
 ## Screenshots
