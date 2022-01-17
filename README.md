@@ -21,6 +21,21 @@ After spinning up the container with docker you will have:
 - Django Admin -> http://localhost:7070/admin/
 - DRF Api Product View -> http://localhost:7070/api/product/ 
 
+## Running Tests
+
+- Back End
+```bash
+docker exec -it myproductschallenge_web_1 bash
+python manage.py test
+```
+
+## Create Djando Admin User
+
+```bash
+docker exec -it myproductschallenge_web_1 bash
+python manage.py createsuperuser
+```
+
 ## Screenshots
 
 ![alt text](https://drive.google.com/uc?id=1BqpnHwPunuar9813RD86DfWcGJK3v8P1)
